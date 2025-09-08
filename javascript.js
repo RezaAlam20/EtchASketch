@@ -1,10 +1,21 @@
+
+
+
+
 let grid = document.querySelector(".grid")
+
 let n = 16
+
 let gridLength = n ** 2 
 
 
 let squareWidth = grid.offsetWidth / n ; 
 let squareHeight = grid.offsetHeight / n ; 
+
+
+
+
+
 
 
 
@@ -22,7 +33,7 @@ function makeSquares(){
 
 
         grid.append(div)
-        
+
 
 
     
@@ -31,44 +42,31 @@ function makeSquares(){
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 makeSquares()
 
 
 let squares = document.querySelectorAll(".square")
-let Drawing = false ; 
+
+
+let Drawing = false; 
+
+
+
+
+
 
 function DrawingMode (){
     squares.forEach((square)=>{
-        square.addEventListener("mousedown",()=>Drawing = true)
+        square.addEventListener("mousedown",()=>{Drawing = true} 
+         )
         document.addEventListener("mouseup", ()=>Drawing = false)
+
 
     })
         
 }
+
+
 DrawingMode()
 
 
@@ -94,13 +92,23 @@ let chooseColor = document.querySelector("#colorSelection").addEventListener("in
 
 
 let squareChanged = false ;
-for(let square of squares) { 
+function mouseStateOnSquare (){
+    for(let square of squares) { 
     square.addEventListener("mouseout" , ()=> { 
         if (rainbowMode) { 
             rainbows()
         }
     })
 }
+
+
+
+
+
+}
+mouseStateOnSquare()
+
+
 
 
 function rainbows(){
@@ -126,25 +134,60 @@ document.querySelector(".eraser").addEventListener("click" , () => {
 })
 
 
+function MouseOverEventListener(){ 
+    squares.forEach ((square)=> { 
+        square.addEventListener("mouseover",(e)=>{
 
-squares.forEach ((square)=> { 
-    square.addEventListener("mouseover",()=>{
 
+            if (eraser && Drawing ) { 
+                square.style.backgroundColor = "#ffffff" 
 
-        if (eraser && Drawing ) { 
-            square.style.backgroundColor = "#ffffff" 
-
-        }
-        else if (Drawing && eraser == false){ 
-            square.style.backgroundColor = color 
-        }
-        console.log(eraser) 
+            }
+            else if (Drawing && eraser == false){ 
+                square.style.backgroundColor = color 
+            }
 
 
 
     })
  
 })
+
+
+
+
+
+}
+MouseOverEventListener()
+
+
+
+let clear = document.querySelector(".clear").addEventListener("click",() => { 
+    squares.forEach((square)=> { 
+        square.style.backgroundColor = "#ffffff" 
+    })
+} )
+
+
+
+
+
+
+document.querySelector(".gridRange").addEventListener("change" , (e) => { 
+    n = e.target.value
+    makeSquares()
+    squares = document.querySelectorAll(".square")
+    
+
+
+    mouseStateOnSquare()
+    DrawingMode()
+    MouseOverEventListener()
+    
+    
+
+} )
+
 
 
 
