@@ -1,5 +1,5 @@
 let grid = document.querySelector(".grid")
-let n = 64
+let n = 16
 let gridLength = n ** 2 
 
 
@@ -71,16 +71,16 @@ function DrawingMode (){
 }
 DrawingMode()
 
-squares.forEach ((square)=> { 
-    square.addEventListener("mouseover",()=>{
-       if(Drawing){
-        square.style.backgroundColor = color;
-       }
-       else return
-       
-    })
- 
-})
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -114,9 +114,38 @@ function rainbows(){
 
 
 let rainbowMode = false 
-rainbowMode = document.querySelector(".rainbow").addEventListener("click" , ()=> {
+document.querySelector(".rainbow").addEventListener("click" , ()=> {
     rainbowMode = !rainbowMode; 
 
 }) 
+
+
+let eraser = false 
+document.querySelector(".eraser").addEventListener("click" , () => { 
+    eraser = !eraser ;
+})
+
+
+
+squares.forEach ((square)=> { 
+    square.addEventListener("mouseover",()=>{
+
+
+        if (eraser && Drawing ) { 
+            square.style.backgroundColor = "#ffffff" 
+
+        }
+        else if (Drawing && eraser == false){ 
+            square.style.backgroundColor = color 
+        }
+        console.log(eraser) 
+
+
+
+    })
+ 
+})
+
+
 
 
