@@ -81,7 +81,8 @@ html , body {
     width:  45%;
     height: 100%;
 }
-.btn { 
+.btn , label { 
+    text-align: center;
     background-color: #4a6fa5;
     color: #ffffff;
     padding: 10px;
