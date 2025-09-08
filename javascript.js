@@ -8,10 +8,18 @@ let n = 16
 
 let gridLength = n ** 2 
 
-
 let squareWidth = grid.offsetWidth / n ; 
 let squareHeight = grid.offsetHeight / n ; 
+function squareSize (){ 
+    squareWidth = grid.offsetWidth / n ; 
+    squareHeight = grid.offsetHeight / n ; 
+    return
+    
 
+
+
+}
+squareSize()
 
 
 
@@ -174,7 +182,11 @@ let clear = document.querySelector(".clear").addEventListener("click",() => {
 
 
 document.querySelector(".gridRange").addEventListener("change" , (e) => { 
+    removeExraSq()
     n = e.target.value
+    gridLength = n ** 2
+    squareSize()
+
     makeSquares()
     squares = document.querySelectorAll(".square")
     
@@ -187,6 +199,14 @@ document.querySelector(".gridRange").addEventListener("change" , (e) => {
     
 
 } )
+
+
+function removeExraSq () {
+    while(grid.firstChild) {
+        grid.removeChild(grid.firstChild)
+    }
+}
+
 
 
 
