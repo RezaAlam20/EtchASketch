@@ -10,6 +10,8 @@ let gridLength = n ** 2
 
 let squareWidth = grid.offsetWidth / n ; 
 let squareHeight = grid.offsetHeight / n ; 
+
+
 function squareSize (){ 
     squareWidth = grid.offsetWidth / n ; 
     squareHeight = grid.offsetHeight / n ; 
@@ -67,6 +69,7 @@ function DrawingMode (){
     squares.forEach((square)=>{
         square.addEventListener("mousedown",()=>{Drawing = true} 
          )
+  
         document.addEventListener("mouseup", ()=>Drawing = false)
 
 
@@ -92,7 +95,7 @@ DrawingMode()
 
 let color = "#000000";
 let chooseColor = document.querySelector("#colorSelection").addEventListener("input", function setColor(e) {
-
+    rainbowMode = false 
     return color = e.target.value
     
 
@@ -132,6 +135,7 @@ function rainbows(){
 let rainbowMode = false 
 document.querySelector(".rainbow").addEventListener("click" , ()=> {
     rainbowMode = !rainbowMode; 
+    eraser = false 
 
 }) 
 
@@ -142,8 +146,12 @@ document.querySelector(".eraser").addEventListener("click" , () => {
 })
 
 
+
+
 function MouseOverEventListener(){ 
     squares.forEach ((square)=> { 
+
+        square.style.opacity = 0.1  
         square.addEventListener("mouseover",(e)=>{
 
 
@@ -151,22 +159,41 @@ function MouseOverEventListener(){
                 square.style.backgroundColor = "#ffffff" 
 
             }
-            else if (Drawing && eraser == false){ 
+            else if (Drawing && eraser == false && square.style.opacity < 1 ){
+
+
+                let opacity = parseFloat(square.style.opacity)
+                opacity += 0.1
+                square.style.opacity = opacity;
+
                 square.style.backgroundColor = color 
+
+
+
+
+                
             }
+            
 
 
 
     })
  
 })
-
-
-
-
-
 }
 MouseOverEventListener()
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -174,6 +201,7 @@ let clear = document.querySelector(".clear").addEventListener("click",() => {
     squares.forEach((square)=> { 
         square.style.backgroundColor = "#ffffff" 
     })
+    eraser = false
 } )
 
 
@@ -206,7 +234,6 @@ function removeExraSq () {
         grid.removeChild(grid.firstChild)
     }
 }
-
 
 
 
